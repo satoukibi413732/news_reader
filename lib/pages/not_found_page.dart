@@ -6,7 +6,7 @@ class NotFoundPage extends StatelessWidget {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text('404'),
+        title: Text('Eorror 404'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -14,12 +14,14 @@ class NotFoundPage extends StatelessWidget {
         children: <Widget>[
           Icon(
             Icons.error,
+            size: 36,
+            color: Colors.red,
           ),
           Container(
             alignment: Alignment.center,
             child: Text(
-              '404，网页飘走了',
-              style: TextStyle(fontSize: 16),
+              '404',
+              style: TextStyle(fontSize: 36),
             ),
           )
         ],

@@ -9,7 +9,6 @@ var notFoundHandler = new Handler(
 });
 
 var homeHandler = new Handler(
-  handlerFunc: (BuildContext context,Map<String,List<Object>> params){
-    return HomePage();
-  }
-);
+    handlerFunc: (BuildContext context, Map<String, List<Object>> params) {
+  return HomePage();
+});

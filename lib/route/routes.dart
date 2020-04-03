@@ -6,6 +6,7 @@ import 'package:news_reader/route/router_handlers.dart';
 class Routes {
   static String home = '/';
   static String notFound = '/404';
+  static String mine = '/mine';
   static void configureRoutes(Router router) {
     router.notFoundHandler = new Handler(
         handlerFunc: (BuildContext context, Map<String, List<String>> params) {
