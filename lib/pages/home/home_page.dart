@@ -9,9 +9,6 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> with TickerProviderStateMixin {
   int _selectedIndex = 0;
-  PageController _pageController = PageController(
-    initialPage: 0,
-  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,14 +22,13 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
           fixedColor: Colors.blue,
           onTap: _onItemTapped,
         ),
-        body: PageView(
-          controller: _pageController,
+        body: IndexedStack(
+          index: _selectedIndex,
           children: <Widget>[NewsPage(), MinePage()],
         ));
   }
 
   void _onItemTapped(int index) {
-    _pageController.jumpToPage(index);
     setState(() {
       _selectedIndex = index;
     });

@@ -8,7 +8,6 @@ class NewsPage extends StatefulWidget {
 }
 
 class _NewsPageState extends State<NewsPage> with TickerProviderStateMixin {
-  int _menuIndex = 0;
   TabController _tabController;
   List tabs = ['发现', "专栏"];
   @override

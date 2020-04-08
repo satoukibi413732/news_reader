@@ -39,9 +39,9 @@ class CardWidget extends StatelessWidget {
             children: <Widget>[
               IconButton(
                 icon: Icon(Icons.thumb_up),
-                onPressed: () => null,
+                onPressed: () {},
               ),
-              Text('300'),
+              Text(item['likedNum']),
               IconButton(
                 icon: Icon(Icons.share),
                 onPressed: () => null,
