@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class CardWidget extends StatelessWidget {
-  final Map<String, dynamic> item;
+  var item;
   CardWidget(this.item);
   @override
   Widget build(BuildContext context) {
@@ -15,23 +15,24 @@ class CardWidget extends StatelessWidget {
         children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[Text(item['title']), Text(item['date'])],
+//          , Text(item['date'])
+            children: <Widget>[Text(item['title'])],
           ),
           Flex(
             direction: Axis.horizontal,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: Image(
-                  image: NetworkImage(item['imgSrc']),
-                  width: 100,
-                ),
-              ),
-              Expanded(
-                flex: 2,
-                child: Text('1' * 100, softWrap: true),
-              ),
+//              Expanded(
+//                flex: 1,
+//                child: Image(
+//                  image: NetworkImage(item['imgSrc']),
+//                  width: 100,
+//                ),
+//              ),
+//              Expanded(
+//                flex: 2,
+//                child: Text('1' * 100, softWrap: true),
+//              ),
             ],
           ),
           Row(
@@ -41,7 +42,7 @@ class CardWidget extends StatelessWidget {
                 icon: Icon(Icons.thumb_up),
                 onPressed: () {},
               ),
-              Text(item['likedNum']),
+//              Text(item['likedNum']),
               IconButton(
                 icon: Icon(Icons.share),
                 onPressed: () => null,
