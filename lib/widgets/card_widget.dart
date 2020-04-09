@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 class CardWidget extends StatelessWidget {
@@ -15,24 +16,29 @@ class CardWidget extends StatelessWidget {
         children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//          , Text(item['date'])
             children: <Widget>[Text(item['title'])],
           ),
-          Flex(
-            direction: Axis.horizontal,
+          Row(
+            children: <Widget>[Text(item['source'])],
+          ),
+          Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-//              Expanded(
-//                flex: 1,
-//                child: Image(
-//                  image: NetworkImage(item['imgSrc']),
-//                  width: 100,
-//                ),
-//              ),
-//              Expanded(
-//                flex: 2,
-//                child: Text('1' * 100, softWrap: true),
-//              ),
+              Expanded(
+                flex: 1,
+                child: Image(
+                  image: NetworkImage(item['imgsrc']),
+                  width: 100,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              Expanded(
+                flex: 1,
+                child: Text("${item['digest']}...", softWrap: true),
+              )
             ],
           ),
           Row(
