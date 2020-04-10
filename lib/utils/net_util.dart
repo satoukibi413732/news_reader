@@ -19,8 +19,8 @@ class NetUtil {
   }
 
   static Future test(BuildContext context) async {
-    var response = await _get(
-        context, 'https://api.isoyu.com/api/News/new_list?type=1&page=20');
-    return response.data;
+    var response = await _get(context,
+        'http://c.m.163.com/nc/article/headline/T1348647853363/0-10.html');
+    return response.data['T1348647853363'];
   }
 }

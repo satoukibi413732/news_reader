@@ -23,7 +23,7 @@ class _DiscoverTabBarState extends State<DiscoverTabBar> {
   _getTest() {
     NetUtil.test(context).then((v) {
       setState(() {
-        this._item = v['data'];
+        _item = v;
       });
     });
   }
@@ -34,12 +34,12 @@ class _DiscoverTabBarState extends State<DiscoverTabBar> {
             itemBuilder: (context, index) {
               return Container(
                 alignment: Alignment.center,
-                child: CardWidget(this._item[index]),
+                child: CardWidget(_item[index]),
               );
             },
             separatorBuilder: (context, index) => Divider(
                   height: 0,
                 ),
-            itemCount: this._item.length));
+            itemCount: _item.length));
   }
 }
