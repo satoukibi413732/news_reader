@@ -16,7 +16,7 @@ class CardWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[Text(item['title'])],
           ),
           Row(
@@ -38,7 +38,7 @@ class CardWidget extends StatelessWidget {
             children: <Widget>[
               Expanded(
                 flex: 1,
-                child: Text("${item['digest']}...", softWrap: true),
+                child: Text("${item['digest']}", softWrap: true),
               )
             ],
           ),

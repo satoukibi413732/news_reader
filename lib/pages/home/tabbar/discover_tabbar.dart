@@ -2,6 +2,7 @@ import 'dart:core';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:news_reader/utils/net_util.dart';
 import 'package:news_reader/widgets/card_widget.dart';
 
@@ -11,41 +12,50 @@ class DiscoverTabBar extends StatefulWidget {
 }
 
 class _DiscoverTabBarState extends State<DiscoverTabBar> {
-  var _item;
-
+  List _item = [];
+  ScrollController _scrollController = new ScrollController();
   @override
   void initState() {
     super.initState();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        Fluttertoast.showToast(msg: "没有更多了");
+      }
+    });
     NetUtil.init();
+    _getMoreData();
+  }
+
+  Future _getMoreData() async {
+    await NetUtil.getTopNews(context).then((value) {
+      _item = value;
+    });
   }
 
   Widget build(BuildContext context) {
-    return Center(
-      child: FutureBuilder(
-        future: NetUtil.getTopNews(context),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.hasError) {
-              return Text("Error: ${snapshot.error}");
-            } else {
-              print(snapshot);
-              return ListView.separated(
-                  itemBuilder: (context, index) {
-                    return Container(
-                      alignment: Alignment.center,
-                      child: CardWidget(snapshot.data[index]),
-                    );
-                  },
-                  separatorBuilder: (context, index) => Divider(
-                        height: 0,
-                      ),
-                  itemCount: snapshot.data.length);
-            }
-          } else {
-            return CircularProgressIndicator();
-          }
-        },
+    return Container(
+      child: RefreshIndicator(
+        onRefresh: _refresh,
+        child: ListView.separated(
+          itemBuilder: (context, index) {
+            return Container(
+              alignment: Alignment.center,
+              child: CardWidget(_item[index]),
+            );
+          },
+          separatorBuilder: (context, index) => Divider(
+            height: 0,
+          ),
+          itemCount: _item.length,
+          controller: _scrollController,
+        ),
       ),
     );
+  }
+
+  Future _refresh() async {
+    _item.clear();
+    await _getMoreData();
   }
 }

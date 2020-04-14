@@ -20,7 +20,7 @@ class NetUtil {
 
   static Future getTopNews(BuildContext context) async {
     var response =
-        await _get(context, '/article/headline/T1348647853363/0-10.html');
+        await _get(context, '/article/headline/T1348647853363/0-40.html');
     return Future.value(response.data['T1348647853363']);
   }
 }
