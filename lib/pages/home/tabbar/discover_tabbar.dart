@@ -17,29 +17,35 @@ class _DiscoverTabBarState extends State<DiscoverTabBar> {
   void initState() {
     super.initState();
     NetUtil.init();
-    this._getTest();
-  }
-
-  _getTest() {
-    NetUtil.test(context).then((v) {
-      setState(() {
-        _item = v;
-      });
-    });
   }
 
   Widget build(BuildContext context) {
-    return Container(
-        child: ListView.separated(
-            itemBuilder: (context, index) {
-              return Container(
-                alignment: Alignment.center,
-                child: CardWidget(_item[index]),
-              );
-            },
-            separatorBuilder: (context, index) => Divider(
-                  height: 0,
-                ),
-            itemCount: _item.length));
+    return Center(
+      child: FutureBuilder(
+        future: NetUtil.getTopNews(context),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasError) {
+              return Text("Error: ${snapshot.error}");
+            } else {
+              print(snapshot);
+              return ListView.separated(
+                  itemBuilder: (context, index) {
+                    return Container(
+                      alignment: Alignment.center,
+                      child: CardWidget(snapshot.data[index]),
+                    );
+                  },
+                  separatorBuilder: (context, index) => Divider(
+                        height: 0,
+                      ),
+                  itemCount: snapshot.data.length);
+            }
+          } else {
+            return CircularProgressIndicator();
+          }
+        },
+      ),
+    );
   }
 }

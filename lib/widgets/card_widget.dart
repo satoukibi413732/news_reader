@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
+// ignore: must_be_immutable
 class CardWidget extends StatelessWidget {
   var item;
   CardWidget(this.item);
