@@ -6,7 +6,12 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:news_reader/utils/net_util.dart';
 import 'package:news_reader/widgets/card_widget.dart';
 
+GlobalKey<_DiscoverTabBarState> discoverTabBar = GlobalKey();
+
 class DiscoverTabBar extends StatefulWidget {
+  final handleShowChange;
+  DiscoverTabBar({Key key, this.handleShowChange}) : super(key: key);
+
   @override
   _DiscoverTabBarState createState() => _DiscoverTabBarState();
 }
@@ -18,13 +23,25 @@ class _DiscoverTabBarState extends State<DiscoverTabBar> {
   void initState() {
     super.initState();
     _scrollController.addListener(() {
+      if (_scrollController.position.pixels > 1000) {
+        widget.handleShowChange(true);
+      } else {
+        widget.handleShowChange(false);
+      }
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
-        Fluttertoast.showToast(msg: "没有更多了");
+        Fluttertoast.showToast(
+          msg: "没有更多了",
+        );
       }
     });
     NetUtil.init();
     _getMoreData();
+  }
+
+  void goTop() {
+    _scrollController.animateTo(0.0,
+        duration: Duration(milliseconds: 500), curve: Curves.decelerate);
   }
 
   Future _getMoreData() async {

@@ -10,6 +10,13 @@ class NewsPage extends StatefulWidget {
 class _NewsPageState extends State<NewsPage> with TickerProviderStateMixin {
   TabController _tabController;
   List tabs = ['发现', "专栏"];
+  bool _isShow = false;
+  void _handleShowChange(bool newChange) {
+    setState(() {
+      _isShow = newChange;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -18,26 +25,36 @@ class _NewsPageState extends State<NewsPage> with TickerProviderStateMixin {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('主页'),
-        bottom: TabBar(
-            indicatorColor: Colors.white,
-            labelStyle: TextStyle(fontSize: 16, color: Colors.white),
-            unselectedLabelStyle: TextStyle(fontSize: 14, color: Colors.grey),
-            controller: _tabController,
-            tabs: tabs
-                .map((e) => Tab(
-                      text: e,
-                    ))
-                .toList()),
-      ),
-      body: TabBarView(
-        controller: _tabController,
-        children: <Widget>[
-          DiscoverTabBar(),
-          SectionTabBar(),
-        ],
-      ),
-    );
+        appBar: AppBar(
+          title: Text('主页'),
+          bottom: TabBar(
+              indicatorColor: Colors.white,
+              labelStyle: TextStyle(fontSize: 16, color: Colors.white),
+              unselectedLabelStyle: TextStyle(fontSize: 14, color: Colors.grey),
+              controller: _tabController,
+              tabs: tabs
+                  .map((e) => Tab(
+                        text: e,
+                      ))
+                  .toList()),
+        ),
+        body: TabBarView(
+          controller: _tabController,
+          children: <Widget>[
+            DiscoverTabBar(
+              key: discoverTabBar,
+              handleShowChange: (newChange) => _handleShowChange(newChange),
+            ),
+            SectionTabBar(),
+          ],
+        ),
+        floatingActionButton: _isShow
+            ? new FloatingActionButton(
+                child: Icon(Icons.vertical_align_top),
+                onPressed: () {
+                  discoverTabBar.currentState.goTop();
+                },
+              )
+            : null);
   }
 }

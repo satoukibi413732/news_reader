@@ -12,20 +12,20 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('主页')),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.person), title: Text('我的')),
-          ],
-          currentIndex: _selectedIndex,
-          fixedColor: Colors.blue,
-          onTap: _onItemTapped,
-        ),
-        body: IndexedStack(
-          index: _selectedIndex,
-          children: <Widget>[NewsPage(), MinePage()],
-        ));
+      bottomNavigationBar: BottomNavigationBar(
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('主页')),
+          BottomNavigationBarItem(icon: Icon(Icons.person), title: Text('我的')),
+        ],
+        currentIndex: _selectedIndex,
+        fixedColor: Colors.blue,
+        onTap: _onItemTapped,
+      ),
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: <Widget>[NewsPage(), MinePage()],
+      ),
+    );
   }
 
   void _onItemTapped(int index) {
