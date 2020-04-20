@@ -11,10 +11,10 @@ class CardWidget extends StatelessWidget {
   CardWidget(this.item);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-      alignment: Alignment.centerLeft,
-      child: FlatButton(
+    return FlatButton(
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+        alignment: Alignment.centerLeft,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -23,6 +23,7 @@ class CardWidget extends StatelessWidget {
               children: <Widget>[Text(item['title'])],
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[Text(item['source'])],
             ),
             Row(
@@ -48,31 +49,36 @@ class CardWidget extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.thumb_up),
-                  onPressed: () {},
+//                Icon(
+//                  Icons.date_range,
+//                  color: Colors.grey,
+//                ),
+//                Text(item['ptime'].toString()),
+                Icon(
+                  Icons.remove_red_eye,
+                  color: Colors.grey,
                 ),
-//              Text(item['likedNum']),
-                IconButton(
-                  icon: Icon(Icons.share),
-                  onPressed: () => null,
+                Text(item['votecount'].toString()),
+                Icon(
+                  Icons.reply,
+                  color: Colors.grey,
                 ),
-                Text('20'),
+                Text(item['replyCount'].toString()),
               ],
             )
           ],
         ),
-        onPressed: () {
-          print(item['docid']);
-          Navigator.of(context).push(new MaterialPageRoute(builder: (_) {
-            return Browser(
-              url:
-                  "https://c.m.163.com/news/a/${item['docid']}.html?from=special",
-              title: item['title'],
-            );
-          }));
-        },
       ),
+      onPressed: () {
+        print(item['docid']);
+        Navigator.of(context).push(new MaterialPageRoute(builder: (_) {
+          return Browser(
+            url:
+                "https://c.m.163.com/news/a/${item['docid']}.html?from=special",
+            title: item['title'],
+          );
+        }));
+      },
     );
   }
 }

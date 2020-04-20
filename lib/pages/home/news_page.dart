@@ -9,7 +9,7 @@ class NewsPage extends StatefulWidget {
 
 class _NewsPageState extends State<NewsPage> with TickerProviderStateMixin {
   TabController _tabController;
-  List tabs = ['发现', "专栏"];
+  List tabs = ['头条', "专栏"];
   bool _isShow = false;
   void _handleShowChange(bool newChange) {
     setState(() {
@@ -26,7 +26,7 @@ class _NewsPageState extends State<NewsPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('主页'),
+          title: Text('动态新闻'),
           bottom: TabBar(
               indicatorColor: Colors.white,
               labelStyle: TextStyle(fontSize: 16, color: Colors.white),

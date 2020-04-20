@@ -14,8 +14,8 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('主页')),
-          BottomNavigationBarItem(icon: Icon(Icons.person), title: Text('我的')),
+          BottomNavigationBarItem(icon: Icon(Icons.tv), title: Text('每日新闻')),
+          BottomNavigationBarItem(icon: Icon(Icons.person), title: Text('测试')),
         ],
         currentIndex: _selectedIndex,
         fixedColor: Colors.blue,
