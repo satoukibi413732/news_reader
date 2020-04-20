@@ -45,8 +45,12 @@ class _DiscoverTabBarState extends State<DiscoverTabBar> {
   }
 
   Future _getMoreData() async {
+    print('loading');
     await NetUtil.getTopNews(context).then((value) {
-      _item = value;
+      setState(() {
+        _item = value;
+      });
+      print('down!');
     });
   }
 
